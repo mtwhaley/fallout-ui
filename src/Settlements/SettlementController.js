@@ -4,6 +4,7 @@ import SettlementOverview from "./SettlementOverview";
 const SettlementController = () => {
   const [settlements, setSettlements] = useState([]);
   const maxSettlers = 18;
+  const errorColor = "#ff5555";
 
   useEffect(() => {
     fetch("https://localhost:5001/settlement/")
@@ -35,6 +36,7 @@ const SettlementController = () => {
       settlements={settlements}
       maxSettlers={maxSettlers}
       isIncomplete={isIncomplete}
+      errorColor={errorColor}
     />
   );
 };

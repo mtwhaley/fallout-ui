@@ -8,11 +8,13 @@ import {
   Tooltip,
 } from "@mui/material";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
+import ReportIcon from "@mui/icons-material/Report";
 
 const SettlementOverview = ({
   settlements = [],
   maxSettlers = 0,
   isIncomplete = () => {},
+  errorColor,
 }) => {
   return (
     <Paper>
@@ -21,7 +23,8 @@ const SettlementOverview = ({
           <TableRow>
             <TableCell>Name</TableCell>
             <TableCell>Settlers</TableCell>
-            <TableCell>Completion</TableCell>
+            <TableCell>Fortification</TableCell>
+            <TableCell>Space</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -40,7 +43,7 @@ const SettlementOverview = ({
                     <WarningAmberIcon
                       sx={{
                         fontSize: "1em",
-                        color: "#ff6666",
+                        color: errorColor,
                         marginLeft: "0.2em",
                       }}
                     />
@@ -50,7 +53,27 @@ const SettlementOverview = ({
                 )}
               </TableCell>
               <TableCell>
-                {isIncomplete(settlement) ? <>Incomplete</> : <></>}
+                {isIncomplete(settlement) ? (
+                  <span style={{ color: errorColor }}>Incomplete</span>
+                ) : (
+                  <></>
+                )}
+              </TableCell>
+              <TableCell sx={{ position: "relative" }}>
+                {settlement.full ? (
+                  <Tooltip title="Building space is at max capacity">
+                    <ReportIcon
+                      sx={{
+                        fontSize: "2em",
+                        color: errorColor,
+                        position: "absolute",
+                        top: "0.4em",
+                      }}
+                    />
+                  </Tooltip>
+                ) : (
+                  ""
+                )}
               </TableCell>
             </TableRow>
           ))}
