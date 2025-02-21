@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import SettlementOverview from "./SettlementOverview";
 
 const SettlementController = () => {
-  const [Settlements, setSettlements] = useState([]);
+  const [settlements, setSettlements] = useState([]);
+  const maxSettlers = 18;
 
   useEffect(() => {
     fetch("https://localhost:5001/settlement/")
@@ -16,8 +17,10 @@ const SettlementController = () => {
       .then((data) => {
         setSettlements(data);
       });
-  });
+  }, []);
 
-  return <SettlementOverview settlements={Settlements} />;
+  return (
+    <SettlementOverview settlements={settlements} maxSettlers={maxSettlers} />
+  );
 };
 export default SettlementController;
