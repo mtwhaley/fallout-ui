@@ -9,7 +9,11 @@ import {
 } from "@mui/material";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 
-const SettlementOverview = ({ settlements = [], maxSettlers = 0 }) => {
+const SettlementOverview = ({
+  settlements = [],
+  maxSettlers = 0,
+  isIncomplete = () => {},
+}) => {
   return (
     <Paper>
       <Table>
@@ -17,12 +21,12 @@ const SettlementOverview = ({ settlements = [], maxSettlers = 0 }) => {
           <TableRow>
             <TableCell>Name</TableCell>
             <TableCell>Settlers</TableCell>
-            <TableCell></TableCell>
+            <TableCell>Completion</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {settlements.map((settlement) => (
-            <TableRow>
+            <TableRow key={`Overview Table row: ${settlement.name}`}>
               <TableCell>{settlement.name}</TableCell>
               <TableCell
                 sx={{
@@ -44,6 +48,9 @@ const SettlementOverview = ({ settlements = [], maxSettlers = 0 }) => {
                 ) : (
                   <></>
                 )}
+              </TableCell>
+              <TableCell>
+                {isIncomplete(settlement) ? <>Incomplete</> : <></>}
               </TableCell>
             </TableRow>
           ))}
