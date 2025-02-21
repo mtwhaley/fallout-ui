@@ -14,8 +14,12 @@ const SettlementOverview = ({
   settlements = [],
   maxSettlers = 0,
   isIncomplete = () => {},
-  errorColor,
+  area = "Commonwealth",
+  errorColor = "red",
 }) => {
+  const areaSettlements = settlements.filter(
+    (settlement) => area === "all" || settlement.area === area
+  );
   return (
     <Paper>
       <Table>
@@ -28,13 +32,12 @@ const SettlementOverview = ({
           </TableRow>
         </TableHead>
         <TableBody>
-          {settlements.map((settlement) => (
+          {areaSettlements.map((settlement) => (
             <TableRow key={`Overview Table row: ${settlement.name}`}>
               <TableCell>{settlement.name}</TableCell>
               <TableCell
                 sx={{
-                  display: "inline-flex",
-                  alignItems: "center",
+                  position: "relative",
                 }}
               >
                 {settlement.numSettlers}
@@ -42,9 +45,11 @@ const SettlementOverview = ({
                   <Tooltip title="Settlement is at max capacity">
                     <WarningAmberIcon
                       sx={{
-                        fontSize: "1em",
+                        position: "absolute",
+                        fontSize: "1.3em",
                         color: errorColor,
-                        marginLeft: "0.2em",
+                        left: "2em",
+                        top: "0.95em",
                       }}
                     />
                   </Tooltip>
@@ -54,7 +59,9 @@ const SettlementOverview = ({
               </TableCell>
               <TableCell>
                 {isIncomplete(settlement) ? (
-                  <span style={{ color: errorColor }}>Incomplete</span>
+                  <span style={{ color: errorColor, cursor: "default" }}>
+                    Incomplete
+                  </span>
                 ) : (
                   <></>
                 )}

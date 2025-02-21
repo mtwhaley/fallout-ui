@@ -32,12 +32,14 @@ const SettlementController = () => {
   };
 
   return (
-    <SettlementOverview
-      settlements={settlements}
-      maxSettlers={maxSettlers}
-      isIncomplete={isIncomplete}
-      errorColor={errorColor}
-    />
+    <>
+      <SettlementOverview
+        settlements={settlements}
+        maxSettlers={maxSettlers}
+        isIncomplete={isIncomplete}
+        errorColor={errorColor}
+      />
+    </>
   );
 };
 export default SettlementController;
