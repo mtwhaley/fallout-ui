@@ -30,6 +30,13 @@ const theme = createTheme({
         },
       },
     },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          marginTop: "0.5em",
+        },
+      },
+    },
   },
 });
 

@@ -10,13 +10,13 @@ import {
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import ReportIcon from "@mui/icons-material/Report";
 import NoResults from "./NoResults";
+import util from "../Util";
 
 const SettlementOverview = ({
   settlements = [],
   maxSettlers = 0,
   isIncomplete = () => {},
   area = "all",
-  errorColor = "red",
 }) => {
   const areaSettlements = settlements.filter(
     (settlement) => area === "all" || settlement.area === area
@@ -48,7 +48,7 @@ const SettlementOverview = ({
                       sx={{
                         position: "absolute",
                         fontSize: "1.3em",
-                        color: errorColor,
+                        color: util.colors.error,
                         left: "2em",
                         top: "0.95em",
                       }}
@@ -60,7 +60,7 @@ const SettlementOverview = ({
               </TableCell>
               <TableCell>
                 {isIncomplete(settlement) ? (
-                  <span style={{ color: errorColor, cursor: "default" }}>
+                  <span style={{ color: util.colors.error, cursor: "default" }}>
                     Incomplete
                   </span>
                 ) : (
@@ -73,7 +73,7 @@ const SettlementOverview = ({
                     <ReportIcon
                       sx={{
                         fontSize: "2em",
-                        color: errorColor,
+                        color: util.colors.error,
                         position: "absolute",
                         top: "0.4em",
                       }}

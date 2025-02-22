@@ -1,9 +1,10 @@
 import SettlementOverview from "./SettlementOverview";
 import SettlementDetails from "./SettlementDetails";
+import { useState } from "react";
 
 const SettlementController = ({ settlements, area }) => {
+  const [detailSettlement, setDetailSettlement] = useState(settlements[0]);
   const maxSettlers = 18;
-  const errorColor = "#ff5555";
 
   const isIncomplete = (settlement) => {
     const completionKeys = ["walls", "defenses", "armored", "weaponized"];
@@ -18,12 +19,11 @@ const SettlementController = ({ settlements, area }) => {
 
   return (
     <>
-      <SettlementDetails />
+      <SettlementDetails settlement={settlements[1]} />
       <SettlementOverview
         settlements={settlements}
         maxSettlers={maxSettlers}
         isIncomplete={isIncomplete}
-        errorColor={errorColor}
         area={area}
       />
     </>
