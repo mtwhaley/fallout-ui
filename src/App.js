@@ -11,10 +11,11 @@ export default function App() {
     isLoading: true,
     response: [],
   });
+  const [areas, setAreas] = useState({ isLoading: true, response: [] });
   const [areaIndex, setAreaIndex] = useState(0);
-  const areas = ["Commonwealth", "Far Harbor", "Nuka-World", "all"];
 
   const handleAreaChange = (event, newIndex) => {
+    console.log(newIndex);
     setAreaIndex(newIndex);
   };
 
@@ -33,24 +34,41 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    setAreaIndex(areas.indexOf("Commonwealth"));
+    fetch("https://localhost:5001/area/")
+      .then((response) => {
+        if (!response.ok) {
+          setAreas({ isLoading: false, response: [] });
+          throw new Error("network response error");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        const areaList = data.map((area) => area.name);
+        const optionList = [...areaList, "all"];
+        setAreas({ isLoading: false, response: optionList });
+        setAreaIndex(optionList.indexOf("Commonwealth"));
+      });
   }, []);
 
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
         <Header />
-        <AreaSelector
-          areas={areas}
-          selectedIndex={areaIndex}
-          onAreaChange={handleAreaChange}
-        />
+        {areas.isLoading ? (
+          <LoadingSpinner card={{ height: "3em" }} />
+        ) : (
+          <AreaSelector
+            areas={areas.response}
+            selectedIndex={areaIndex}
+            onAreaChange={handleAreaChange}
+          />
+        )}
         {settlements.isLoading ? (
           <LoadingSpinner />
         ) : (
           <SettlementController
             settlements={settlements.response}
-            area={areas[areaIndex]}
+            area={areas.response[areaIndex]}
           />
         )}
       </ThemeProvider>
