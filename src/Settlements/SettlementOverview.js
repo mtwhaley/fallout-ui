@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import ReportIcon from "@mui/icons-material/Report";
+import NoResults from "./NoResults";
 
 const SettlementOverview = ({
   settlements = [],
@@ -20,7 +21,7 @@ const SettlementOverview = ({
   const areaSettlements = settlements.filter(
     (settlement) => area === "all" || settlement.area === area
   );
-  return (
+  return areaSettlements.length > 0 ? (
     <Paper sx={{ marginTop: "0.5em" }}>
       <Table>
         <TableHead>
@@ -87,6 +88,8 @@ const SettlementOverview = ({
         </TableBody>
       </Table>
     </Paper>
+  ) : (
+    <NoResults />
   );
 };
 

@@ -19,6 +19,7 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <Header />
         <AreaSelector
+          areas={areas}
           selectedIndex={areaIndex}
           onAreaChange={handleAreaChange}
         />
