@@ -1,4 +1,5 @@
 import SettlementOverview from "./SettlementOverview";
+import SettlementDetails from "./SettlementDetails";
 
 const SettlementController = ({ settlements, area }) => {
   const maxSettlers = 18;
@@ -17,6 +18,7 @@ const SettlementController = ({ settlements, area }) => {
 
   return (
     <>
+      <SettlementDetails />
       <SettlementOverview
         settlements={settlements}
         maxSettlers={maxSettlers}
