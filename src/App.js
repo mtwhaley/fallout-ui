@@ -4,6 +4,7 @@ import { ThemeProvider } from "@mui/material";
 import theme from "./Theme";
 import SettlementController from "./Settlements/SettlementController";
 import AreaSelector from "./Settlements/AreaSelector";
+import LoadingSpinner from "./LoadingSpinner";
 
 export default function App() {
   const [areaIndex, setAreaIndex] = useState(0);
@@ -18,6 +19,7 @@ export default function App() {
     <div className="App">
       <ThemeProvider theme={theme}>
         <Header />
+        <LoadingSpinner />
         <AreaSelector
           areas={areas}
           selectedIndex={areaIndex}
