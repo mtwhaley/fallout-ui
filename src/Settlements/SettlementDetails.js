@@ -1,5 +1,7 @@
 import {
   Box,
+  Button,
+  IconButton,
   Modal,
   Paper,
   Table,
@@ -10,6 +12,7 @@ import {
 } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
+import CloseIcon from "@mui/icons-material/Close";
 import util from "../Util";
 
 const SettlementDetails = ({ onClose = () => {}, open = true, settlement }) => {
@@ -66,6 +69,7 @@ const SettlementDetails = ({ onClose = () => {}, open = true, settlement }) => {
           border: "2px solid #000",
           boxShadow: 24,
           p: 4,
+          pb: 2,
         }}
       >
         <Typography id="modal-modal-title" variant="h6" component="h2">
@@ -76,7 +80,10 @@ const SettlementDetails = ({ onClose = () => {}, open = true, settlement }) => {
             <TableBody>
               {propertyOrder.map((property) => {
                 return (
-                  <TableRow key={`settlement detail ${property.attribute}`}>
+                  <TableRow
+                    key={`settlement detail ${property.attribute}`}
+                    sx={{ userSelect: "none" }}
+                  >
                     <TableCell>{property.display}</TableCell>
                     <TableCell>
                       {configuredSettlement(settlement)[property.attribute]}
@@ -87,6 +94,17 @@ const SettlementDetails = ({ onClose = () => {}, open = true, settlement }) => {
             </TableBody>
           </Table>
         </Paper>
+        <Paper elevation={0} sx={{ display: "flex", justifyContent: "right" }}>
+          <Button size="medium" onClick={onClose}>
+            Close
+          </Button>
+        </Paper>
+        <IconButton
+          onClick={onClose}
+          sx={{ position: "absolute", top: "0.5em", right: "0.5em" }}
+        >
+          <CloseIcon />
+        </IconButton>
       </Box>
     </Modal>
   );

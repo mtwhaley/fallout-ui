@@ -4,7 +4,7 @@ const util = {
     validation: "#00cc77",
     overviewTable: {
       header: "#168a2b",
-      rowHover: "#c5edcc",
+      rowHover: "#d8f0dc",
       rowSelect: "#c5edcc",
     },
   },
