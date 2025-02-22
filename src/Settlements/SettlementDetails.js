@@ -12,11 +12,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import util from "../Util";
 
-const SettlementDetails = ({
-  handleClose = () => {},
-  open = true,
-  settlement,
-}) => {
+const SettlementDetails = ({ onClose = () => {}, open = true, settlement }) => {
   const propertyOrder = [
     { attribute: "id", display: "ID" },
     { attribute: "area", display: "Area" },
@@ -53,7 +49,7 @@ const SettlementDetails = ({
   };
 
   return (
-    <Modal open={open} onClose={handleClose}>
+    <Modal open={open} onClose={onClose}>
       <Box
         sx={{
           position: "absolute",

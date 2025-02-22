@@ -3,7 +3,7 @@ import SettlementDetails from "./SettlementDetails";
 import { useState } from "react";
 
 const SettlementController = ({ settlements, area }) => {
-  const [detailSettlement, setDetailSettlement] = useState(settlements[0]);
+  const [detailSettlement, setDetailSettlement] = useState(undefined);
   const maxSettlers = 18;
 
   const isIncomplete = (settlement) => {
@@ -17,9 +17,18 @@ const SettlementController = ({ settlements, area }) => {
     return !reducedValue;
   };
 
+  const handleCloseModal = () => {
+    setDetailSettlement(undefined);
+  };
+
   return (
     <>
-      <SettlementDetails settlement={settlements[1]} />
+      {detailSettlement !== undefined && (
+        <SettlementDetails
+          settlement={detailSettlement}
+          onClose={handleCloseModal}
+        />
+      )}
       <SettlementOverview
         settlements={settlements}
         maxSettlers={maxSettlers}
