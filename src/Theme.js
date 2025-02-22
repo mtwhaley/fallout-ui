@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material";
+import util from "./Util";
 
 const theme = createTheme({
   typography: {
@@ -8,7 +9,7 @@ const theme = createTheme({
     MuiTableHead: {
       styleOverrides: {
         root: {
-          backgroundColor: "#168a2b", // Example color
+          backgroundColor: util.colors.overviewTable.header, // Example color
         },
       },
     },
@@ -16,7 +17,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           "& .MuiTableRow-root:hover": {
-            backgroundColor: "#c5edcc",
+            backgroundColor: util.colors.overviewTable.rowHover,
           },
         },
       },

@@ -11,6 +11,7 @@ import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import ReportIcon from "@mui/icons-material/Report";
 import NoResults from "./NoResults";
 import util from "../Util";
+import { useState } from "react";
 
 const SettlementOverview = ({
   settlements = [],
@@ -19,9 +20,11 @@ const SettlementOverview = ({
   area = "all",
   openDetailModal = () => {},
 }) => {
+  const [highlightRow, setHighlightRow] = useState(0);
   const areaSettlements = settlements.filter(
     (settlement) => area === "all" || settlement.area === area
   );
+
   return areaSettlements.length > 0 ? (
     <Paper sx={{ marginTop: "0.5em" }}>
       <Table>
@@ -37,9 +40,15 @@ const SettlementOverview = ({
           {areaSettlements.map((settlement) => (
             <TableRow
               key={`Overview Table row: ${settlement.name}`}
-              sx={{ userSelect: "none" }}
+              sx={{
+                userSelect: "none",
+                backgroundColor:
+                  highlightRow === settlement.id
+                    ? util.colors.overviewTable.rowSelect
+                    : "",
+              }}
               onClick={() => {
-                console.log(settlement.name);
+                setHighlightRow(settlement.id);
               }}
               onDoubleClick={() => {
                 openDetailModal(settlement);
