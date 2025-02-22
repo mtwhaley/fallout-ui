@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import SettlementOverview from "./SettlementOverview";
 
-const SettlementController = () => {
+const SettlementController = ({ area }) => {
   const [settlements, setSettlements] = useState([]);
   const maxSettlers = 18;
   const errorColor = "#ff5555";
@@ -38,6 +38,7 @@ const SettlementController = () => {
         maxSettlers={maxSettlers}
         isIncomplete={isIncomplete}
         errorColor={errorColor}
+        area={area}
       />
     </>
   );

@@ -14,14 +14,14 @@ const SettlementOverview = ({
   settlements = [],
   maxSettlers = 0,
   isIncomplete = () => {},
-  area = "Commonwealth",
+  area = "all",
   errorColor = "red",
 }) => {
   const areaSettlements = settlements.filter(
     (settlement) => area === "all" || settlement.area === area
   );
   return (
-    <Paper>
+    <Paper sx={{ marginTop: "0.5em" }}>
       <Table>
         <TableHead>
           <TableRow>
