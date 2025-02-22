@@ -1,24 +1,8 @@
-import { useEffect, useState } from "react";
 import SettlementOverview from "./SettlementOverview";
 
-const SettlementController = ({ area }) => {
-  const [settlements, setSettlements] = useState([]);
+const SettlementController = ({ settlements, area }) => {
   const maxSettlers = 18;
   const errorColor = "#ff5555";
-
-  useEffect(() => {
-    fetch("https://localhost:5001/settlement/")
-      .then((response) => {
-        if (!response.ok) {
-          console.log(response);
-          throw new Error("network response error");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setSettlements(data);
-      });
-  }, []);
 
   const isIncomplete = (settlement) => {
     const completionKeys = ["walls", "defenses", "armored", "weaponized"];
