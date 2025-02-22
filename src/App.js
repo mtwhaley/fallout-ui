@@ -15,7 +15,6 @@ export default function App() {
   const [areaIndex, setAreaIndex] = useState(0);
 
   const handleAreaChange = (event, newIndex) => {
-    console.log(newIndex);
     setAreaIndex(newIndex);
   };
 
