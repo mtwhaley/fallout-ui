@@ -17,6 +17,10 @@ const SettlementController = ({ settlements, area }) => {
     return !reducedValue;
   };
 
+  const openDetailModal = (settlement) => {
+    setDetailSettlement(settlement);
+  };
+
   const handleCloseModal = () => {
     setDetailSettlement(undefined);
   };
@@ -34,6 +38,7 @@ const SettlementController = ({ settlements, area }) => {
         maxSettlers={maxSettlers}
         isIncomplete={isIncomplete}
         area={area}
+        openDetailModal={openDetailModal}
       />
     </>
   );

@@ -17,6 +17,7 @@ const SettlementOverview = ({
   maxSettlers = 0,
   isIncomplete = () => {},
   area = "all",
+  openDetailModal = () => {},
 }) => {
   const areaSettlements = settlements.filter(
     (settlement) => area === "all" || settlement.area === area
@@ -34,7 +35,16 @@ const SettlementOverview = ({
         </TableHead>
         <TableBody>
           {areaSettlements.map((settlement) => (
-            <TableRow key={`Overview Table row: ${settlement.name}`}>
+            <TableRow
+              key={`Overview Table row: ${settlement.name}`}
+              sx={{ userSelect: "none" }}
+              onClick={() => {
+                console.log(settlement.name);
+              }}
+              onDoubleClick={() => {
+                openDetailModal(settlement);
+              }}
+            >
               <TableCell>{settlement.name}</TableCell>
               <TableCell
                 sx={{

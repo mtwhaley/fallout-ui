@@ -23,22 +23,27 @@ const SettlementDetails = ({ onClose = () => {}, open = true, settlement }) => {
     { attribute: "armored", display: "Armored" },
     { attribute: "full", display: "Building Space" },
   ];
-  const configuredSettlement = (settlement) => {
+
+  const getBoolSymbols = (settlement, key) => {
+    console.log(settlement);
+    console.log(key);
     const invertSymbols = ["full"];
+    const validSymbol = (
+      <CheckCircleIcon sx={{ color: util.colors.validation }} />
+    );
+    const errorSymbol = <CancelIcon sx={{ color: util.colors.error }} />;
+
+    if (invertSymbols.indexOf(key) === -1) {
+      return settlement[key] === true ? validSymbol : errorSymbol;
+    }
+    return settlement[key] === true ? errorSymbol : validSymbol;
+  };
+
+  const configuredSettlement = (settlement) => {
     const configured = {};
     Object.keys(settlement).forEach((key) => {
-      if (
-        settlement[key] === true ||
-        (settlement[key] === false && invertSymbols.indexOf(key) !== -1)
-      ) {
-        configured[key] = (
-          <CheckCircleIcon sx={{ color: util.colors.validation }} />
-        );
-      } else if (
-        settlement[key] === false ||
-        (settlement[key] === true && invertSymbols.indexOf(key) !== -1)
-      ) {
-        configured[key] = <CancelIcon sx={{ color: util.colors.error }} />;
+      if (typeof settlement[key] === "boolean") {
+        configured[key] = getBoolSymbols(settlement, key);
       } else if (settlement[key] === null) {
         configured[key] = "";
       } else {
